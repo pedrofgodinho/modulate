@@ -2,8 +2,9 @@ use crate::ModKey;
 use std::collections::HashMap;
 use std::fs;
 use std::path::Path;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub(crate) enum Node {
     Dir {
         name: String,
