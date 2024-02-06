@@ -81,8 +81,8 @@ impl ModManager {
     /// ```
     /// use modulate_lib::ModManager;
     /// let mut manager = ModManager::new("./working_dir".parse().unwrap(), "./bak".parse().unwrap());
-    /// manager.add_mod("mod1", "./mod1".into()).unwrap();
-    /// manager.add_mod("mod2", "./mod2".into()).unwrap();
+    /// manager.add_mod("./mod1".into()).unwrap();
+    /// manager.add_mod("./mod2".into()).unwrap();
     /// manager.activate_mod(0).unwrap();
     /// println!("{:#?}", manager.active_mods());
     /// ```
@@ -99,8 +99,8 @@ impl ModManager {
     /// ```
     /// use modulate_lib::ModManager;
     /// let mut manager = ModManager::new("./working_dir".parse().unwrap(), "./bak".parse().unwrap());
-    /// manager.add_mod("mod1", "./mod1".into()).unwrap();
-    /// manager.add_mod("mod2", "./mod2".into()).unwrap();
+    /// manager.add_mod("./mod1".into()).unwrap();
+    /// manager.add_mod("./mod2".into()).unwrap();
     /// println!("{:#?}", manager.inactive_mods());
     /// ```
     pub fn inactive_mods(&self) -> Vec<&ModMetadata> {
@@ -116,7 +116,7 @@ impl ModManager {
     /// ```
     /// use modulate_lib::ModManager;
     /// let mut manager = ModManager::new("./working_dir".parse().unwrap(), "./bak".parse().unwrap());
-    /// manager.add_mod("mod1", "./mod1".into()).unwrap();
+    /// manager.add_mod("./mod1".into()).unwrap();
     /// ```
     pub fn add_mod(&mut self, dir: PathBuf) -> Result<Uuid, ModError> {
         let key = self.slotmap.insert(Mod::new(dir)?);
@@ -132,7 +132,7 @@ impl ModManager {
     /// ```
     /// use modulate_lib::ModManager;
     /// let mut manager = ModManager::new("./working_dir".parse().unwrap(), "./bak".parse().unwrap());
-    /// let r#mod = manager.add_mod("mod1", "./mod1".into()).unwrap();
+    /// let r#mod = manager.add_mod("./mod1".into()).unwrap();
     /// manager.remove_mod(r#mod).unwrap();
     /// ```
     pub fn remove_mod(&mut self, uuid: Uuid) -> Result<(), ModError> {
@@ -155,7 +155,7 @@ impl ModManager {
     /// ```
     /// use modulate_lib::ModManager;
     /// let mut manager = ModManager::new("./working_dir".parse().unwrap(), "./bak".parse().unwrap());
-    /// let r#mod = manager.add_mod("mod1", "./mod1".into()).unwrap();
+    /// let r#mod = manager.add_mod("./mod1".into()).unwrap();
     /// manager.activate_mod(r#mod).unwrap();
     /// ```
     pub fn activate_mod(&mut self, uuid: Uuid) -> Result<(), ModError> {
@@ -178,7 +178,7 @@ impl ModManager {
     /// ```
     /// use modulate_lib::ModManager;
     /// let mut manager = ModManager::new("./working_dir".parse().unwrap(), "./bak".parse().unwrap());
-    /// let r#mod = manager.add_mod("mod1", "./mod1".into()).unwrap();
+    /// let r#mod = manager.add_mod("./mod1".into()).unwrap();
     /// manager.activate_mod(r#mod).unwrap();
     /// manager.deactivate_mod(r#mod).unwrap();
     /// ```
@@ -203,8 +203,8 @@ impl ModManager {
     /// ```
     /// use modulate_lib::ModManager;
     /// let mut manager = ModManager::new("./working_dir".parse().unwrap(), "./bak".parse().unwrap());
-    /// let mod1 = manager.add_mod("mod1", "./mod1".into()).unwrap();
-    /// let mod2 = manager.add_mod("mod2", "./mod2".into()).unwrap();
+    /// let mod1 = manager.add_mod("./mod1".into()).unwrap();
+    /// let mod2 = manager.add_mod("./mod2".into()).unwrap();
     /// manager.activate_mod(mod1).unwrap();
     /// manager.activate_mod(mod2).unwrap();
     /// manager.reorder_mods(&[1, 0]).unwrap();
@@ -230,8 +230,8 @@ impl ModManager {
     /// ```
     /// use modulate_lib::ModManager;
     /// let mut manager = ModManager::new("./working_dir".parse().unwrap(), "./bak".parse().unwrap());
-    /// let mod1 = manager.add_mod("mod1", "./mod1".into()).unwrap();
-    /// let mod2 = manager.add_mod("mod2", "./mod2".into()).unwrap();
+    /// let mod1 = manager.add_mod("./mod1".into()).unwrap();
+    /// let mod2 = manager.add_mod("./mod2".into()).unwrap();
     /// manager.activate_mod(mod1).unwrap();
     /// manager.activate_mod(mod2).unwrap();
     /// manager.reorder_mods(&[1, 0]).unwrap();
