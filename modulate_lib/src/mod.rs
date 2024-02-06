@@ -14,21 +14,22 @@ pub(crate) struct Mod {
 }
 
 impl Mod {
-    pub(crate) fn new(dir: &str) -> Result<Self, ModError> {
-        if !Path::new(dir).is_dir() {
-            return Err(ModError::ModDirNotFound(dir.to_string()));
+    pub(crate) fn new(dir: PathBuf) -> Result<Self, ModError> {
+        if !Path::new(&dir).is_dir() {
+            return Err(ModError::DirNotFound(dir.to_string_lossy().to_string()));
         }
+        let dir = fs::canonicalize(dir).unwrap();
         // read metadata
-        let metadata_path = Path::new(dir).join("mod.toml");
+        let metadata_path = dir.join("mod.toml");
         if !metadata_path.exists() {
-            return Err(ModError::ModMetadataMissing(dir.to_string()));
+            return Err(ModError::ModMetadataMissing(dir.to_string_lossy().to_string()));
         }
         let metadata =
             toml::from_str::<ModMetadata>(&fs::read_to_string(metadata_path).unwrap()).unwrap();
         Ok(Self {
             metadata,
-            dir: PathBuf::from(dir),
-            node: Node::from_path(Path::new(dir)).unwrap(),
+            node: Node::from_path(&dir).unwrap(),
+            dir,
         })
     }
 }
