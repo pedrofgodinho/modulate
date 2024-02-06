@@ -1,6 +1,5 @@
 use crate::ModKey;
 use std::collections::HashMap;
-use std::fmt::Display;
 use std::fs;
 use std::path::Path;
 
@@ -231,28 +230,13 @@ impl SourcedNode {
         match self {
             SourcedNode::Dir { name, children } => {
                 println!("{}{}", "  ".repeat(ident), name);
-                for (_, node) in children {
+                for node in children.values() {
                     node.print(ident + 1);
                 }
             }
             SourcedNode::File { name, source } => {
                 println!("{}{}: {:?}", "  ".repeat(ident), name, source);
             }
-        }
-    }
-}
-
-impl Display for SourcedNode {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            SourcedNode::Dir { name, children } => {
-                write!(f, "{}", name)?;
-                for (name, node) in children {
-                    write!(f, "\n{}", node)?;
-                }
-                Ok(())
-            }
-            SourcedNode::File { name, source } => write!(f, "{}: {:?}", name, source),
         }
     }
 }
